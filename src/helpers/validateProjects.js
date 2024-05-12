@@ -9,3 +9,13 @@ export const projectExistById = async (id = '') => {
         throw new Error(`Project not found`);
     }
 }
+
+export async function categoryExist(category = ""){
+    const categories = [
+        "Taller",
+        "Practica Supervisada",
+        "Tegnologia"
+    ];
+    if(!categories.includes(category))
+        res.status(400).json({ msg :'No existe la categoria'});
+}

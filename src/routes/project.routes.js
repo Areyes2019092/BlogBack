@@ -3,7 +3,7 @@ import { check } from 'express-validator';
 import { createProject, deleteProject, editProject, getProjects, searchProject } from '../controllers/project.controller.js';
 import uploadImage from '../middlewares/uploadImage .js';
 import { validateFields } from '../middlewares/validateField.js';
-import { projectExistById } from '../helpers/validateProjects.js';
+import { projectExistById, categoryExist } from '../helpers/validateProjects.js';
 
 
 const router = express.Router();
@@ -14,6 +14,7 @@ router.post('/',
         check("title", "This field is required").notEmpty(),
         check("description", "This field is required").notEmpty(),
         check("code", "This field is required").notEmpty(),
+        check("authorName", "Cant be empty").notEmpty(),
         validateFields,
     ], createProject);
 

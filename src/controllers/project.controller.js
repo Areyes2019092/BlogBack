@@ -25,8 +25,8 @@ export const searchProject = async (req, res) => {
 
 export const createProject = async (req, res) => {
     try {
-        const { title, description, code, authorName, image } = req.body;
-        const project = new Project({ title, description, code, authorName, image });
+        const { title, description, code, authorName} = req.body;
+        const project = new Project({ title, description, code, authorName });
         await project.save();
 
         res.status(201).json(project);
@@ -40,12 +40,13 @@ export const editProject = async (req, res) => {
     try {
         const { projectId } = req.params;
 
-        const { title, description, code } = req.body;
+        const { title, description, code, category } = req.body;
 
         const updateFields = {};
         if (title) updateFields.title = title;
         if (description) updateFields.description = description;
         if (code) updateFields.code = code;
+        if (category) updateFields.category = category;
 
         const project = await Project.findByIdAndUpdate(projectId, updateFields, { new: true });
 
