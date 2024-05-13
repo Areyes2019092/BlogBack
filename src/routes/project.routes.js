@@ -1,7 +1,6 @@
 import express from 'express';
 import { check } from 'express-validator';
 import { createProject, deleteProject, editProject, getProjects, searchProject } from '../controllers/project.controller.js';
-import uploadImage from '../middlewares/uploadImage .js';
 import { validateFields } from '../middlewares/validateField.js';
 import { projectExistById } from '../helpers/validateProjects.js';
 
