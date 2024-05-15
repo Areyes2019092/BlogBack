@@ -1,31 +1,31 @@
 "use strict";
-
-import cors from "cors";
 import express from "express";
+import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import { dbConnection } from "./mongo.js";
-import projectRoutes from "../src/routes/project.routes.js";
-
+import postsRoutes from '../src/posts/publication.routes.js';
+import commentsRoutes from '../src/comments/comments.routes.js';
 
 class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
-    this.projectPath = '/blog/v1/projects'
+    this.postsPath = '/blog/v1/posts';
+    this.commentsPath = '/blog/v1/comments';
 
     this.middlewares();
-    this.connectDB();
+    this.conectDB();
     this.routes();
   }
 
-  async connectDB() {
+  async conectDB() {
     await dbConnection();
   }
 
   routes() {
-    this.app.use(this.projectPath, projectRoutes);
-
+    this.app.use(this.postsPath, postsRoutes);
+    this.app.use(this.commentsPath, commentsRoutes);
   }
 
   middlewares() {
@@ -41,8 +41,6 @@ class Server {
       console.log("Server running on port ", this.port);
     });
   }
-
-
 }
 
 export default Server;
